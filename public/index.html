@@ -16,25 +16,18 @@
         
         <script type="text/babel">
 $.ajax({
-            data:"QUERY="+res,
+            data:"QUERY=Eeeelaine",
             url:'http://127.0.0.1:8080/query',
             method:'POST',
             success:function(data)
             {
-                if(myQueries.length<2)
-                {
-                    recursiveQueries(null,selected);
-                    pageLoaded();
-                }
-                else
-                {
-                    myQueries.shift();
-                    recursiveQueries(myQueries,selected);
-                }
+                console.log("dataaaaa: ",data)
 
             }
         });
-            ReactDOM.render(<h2>Hello</h2>, document.getElementById("test1"));
+            //ReactDOM.render(<h2>Hello</h2>, document.getElementById("test1"));
+
+                console.log("aaa: ")
         </script>
 
 
