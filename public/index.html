@@ -5,6 +5,7 @@
         <script src="js/react.min.js"></script>
         <script src="js/react-dom.min.js"></script>
         <script src="js/babel.min.js"></script>
+        <script src="js/jquery.min.js"></script>
     </head>
     <body>
 
@@ -14,6 +15,25 @@
         </div>
         
         <script type="text/babel">
+$.ajax({
+            data:"QUERY="+res,
+            url:'http://127.0.0.1:8080/query',
+            method:'POST',
+            success:function(data)
+            {
+                if(myQueries.length<2)
+                {
+                    recursiveQueries(null,selected);
+                    pageLoaded();
+                }
+                else
+                {
+                    myQueries.shift();
+                    recursiveQueries(myQueries,selected);
+                }
+
+            }
+        });
             ReactDOM.render(<h2>Hello</h2>, document.getElementById("test1"));
         </script>
 
