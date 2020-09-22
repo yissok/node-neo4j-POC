@@ -1,0 +1,14 @@
+{
+  "name": "node-mysql",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-layout": "^0.1.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "mysql": "^2.17.1",
+    "path": "^0.12.7",
+    "routes": "^2.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
