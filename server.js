@@ -25,12 +25,10 @@ function checkIfPlayerWithNameExists(req,res)
     console.log('###########################');
     // npm install --save neo4j-driver
     var neo4j = require('neo4j-driver');
-    var driver = neo4j.driver('bolt://35.175.130.224:33148', neo4j.auth.basic('neo4j', 'purchases-equivalents-tension'));
+var driver = neo4j.driver('bolt://54.87.236.230:34038', neo4j.auth.basic('neo4j', 'friends-axis-conduct'));
 
     var query = 
-      "MATCH (player:Person) \
-    WHERE player.name = '"+req.body.QUERY+"' \
-    RETURN player.name";
+      "MATCH pp =(m:Match)<-[sg:SCORED_GOAL]-(person:Person) WITH collect(sg) AS listOfGoalsPerMatch, person.name AS plName RETURN size(listOfGoalsPerMatch) AS goals,plName ORDER BY goals DESC SKIP "+req.body.QUERY+" LIMIT 9";
 
 
     //  "MATCH (n) \
@@ -43,20 +41,12 @@ function checkIfPlayerWithNameExists(req,res)
 
     session.run(query, params)
       .then(function(result) {
-        result.records.forEach(function(record) {
-            var playerName=record.get('player.name');
-            console.log(playerName," found!");
-            res.status(200).send('OK');
-        })
-        if(result.records.length==0)
-        {
-            console.log(req.body.QUERY,"not found!");
-            res.status(404).send('Not Found')
-        }
+        var response = JSON.stringify(result.records);
+        console.log(response);
+        res.send(response)
       })
       .catch(function(error) {
         console.log(error);
-        res.status(500).send('Internal Server Error')
       });
 }
 
@@ -68,4 +58,4 @@ app.listen(8080, function() {
     console.log('Admin page at     http://127.0.0.1:8080/index.html');
 });
 
-
+//checkIfPlayerWithNameExists("","");
